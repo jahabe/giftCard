@@ -1,13 +1,22 @@
 # Gift Card Automation
 
-This repository contains a simple script that demonstrates how to reward customers who use a store hashtag on Instagram. The script tracks each user's posts and sends different rewards depending on how many times they have posted with the hashtag.
+This repository contains a script that can automatically reward customers who use a store hashtag on Instagram. It keeps track of how many times each user has posted and sends different gifts in response.
 
 Rewards:
 1. First post: free fries
 2. Second post: free coke
 3. Third post: free hamburger
 
-The script `giftcard_instagram.py` is a standalone example and uses a local JSON file to remember user counts. In a production environment, you would replace the placeholder Instagram data and gift card delivery logic with real implementations.
+`giftcard_instagram.py` now integrates with the Instagram Graph API and can call an HTTP gift-card provider. User counts are stored in `user_counts.json`.
+
+To run this script against real data you must supply API credentials via environment variables:
+
+```bash
+export INSTAGRAM_BUSINESS_ID=<your_business_id>
+export INSTAGRAM_ACCESS_TOKEN=<your_access_token>
+export GIFT_CARD_ENDPOINT=https://your.giftcard.provider/send
+export GIFT_CARD_API_KEY=<provider_api_key>
+```
 
 ## Running the example
 
@@ -17,4 +26,4 @@ Run the script with Python 3:
 python3 giftcard_instagram.py
 ```
 
-This will simulate processing a few posts and print the gifts that would be sent.
+The script processes posts containing the hashtag and sends gifts as users meet each reward threshold.
